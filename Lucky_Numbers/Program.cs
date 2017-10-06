@@ -11,7 +11,7 @@ namespace Lucky_Numbers
         static void Main(string[] args)
         {
             int numLow, numHigh;
-            int[] guesses = new int[6];
+            int[] guesses = { 0, 0, 0, 0, 0, 0 };
             int[] luckyNumbers = new int[6];
             int jackpot = 0;
             int numMatched = 0;
@@ -68,6 +68,21 @@ namespace Lucky_Numbers
                         Console.WriteLine("Please enter a valid number (between " + numLow + " and " + numHigh + ")");
                         guesses[i] = int.Parse(Console.ReadLine());
                     }
+
+                    for (int j = 0; j < i;)
+                    {
+                        if (guesses[i] == guesses[j])
+                        {
+                            Console.WriteLine("Please enter a number not already entered.");
+                            guesses[i] = int.Parse(Console.ReadLine());
+                            j = 0;
+                        }
+                        else
+                        {
+                            j++;
+                        }
+                    }
+
                 }
 
                 //generating numbers
@@ -93,9 +108,13 @@ namespace Lucky_Numbers
 
                 for (int i = 0; i < 6; i++)
                 {
-                    if (guesses[i] == luckyNumbers[i])
+                    for (int j = 0; j < 6; j++)
                     {
-                        numMatched++;
+                        if (guesses[i] == luckyNumbers[j])
+                        {
+                            numMatched++;
+                            break;
+                        }
                     }
                 }
 
