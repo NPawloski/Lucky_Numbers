@@ -35,11 +35,14 @@ namespace Lucky_Numbers
                 numHigh = int.Parse(Console.ReadLine());
 
                 int highLowSplit = numHigh - numLow;
-                if (highLowSplit == 0)
+                while (highLowSplit < 9)
                 {
-                    jackpot = 0;
+                    Console.WriteLine("Please enter a number at least 9 higher than the starting number. (" + numLow + ")");
+                    numHigh = int.Parse(Console.ReadLine());
+                    highLowSplit = numHigh - numLow;
                 }
-                else if (highLowSplit <= 10)
+
+                if (highLowSplit <= 10)
                 {
                     jackpot = numGen.Next(10, 100) * 100;
                 }
@@ -68,13 +71,19 @@ namespace Lucky_Numbers
                 for (int i = 0; i < 6; i++)
                 {
                     luckyNumbers[i] = numGen.Next(numLow, numHigh + 1);
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (luckyNumbers[i] == luckyNumbers[j])
+                        {
+                            while (luckyNumbers[i] == luckyNumbers[j])
+                            {
+                                luckyNumbers[i] = numGen.Next(numLow, numHigh + 1);
+                            }
+                        }
+                    }
                     Console.WriteLine("Lucky Number: " + luckyNumbers[i]);
                 }
 
-                for (int i = 0; i < 6; i++)
-                {
-                    Console.WriteLine("Lucky Number: " + luckyNumbers[i]);
-                }
 
                 for (int i = 0; i < 6; i++)
                 {
