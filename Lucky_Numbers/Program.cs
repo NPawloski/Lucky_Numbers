@@ -26,13 +26,15 @@ namespace Lucky_Numbers
             {
 
                 numMatched = 0;
-
+                //obtaining number range
 
                 Console.WriteLine("Please enter a starting number.");
                 numLow = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("Please enter an ending number.");
                 numHigh = int.Parse(Console.ReadLine());
+
+                //checking for an adequate number range
 
                 int highLowSplit = numHigh - numLow;
                 while (highLowSplit < 9)
@@ -55,7 +57,7 @@ namespace Lucky_Numbers
                     jackpot = numGen.Next(1000, 10000) * 100;
                 }
 
-
+                //asking for guesses
 
                 for (int i = 0; i < 6; i++)
                 {
@@ -68,9 +70,12 @@ namespace Lucky_Numbers
                     }
                 }
 
+                //generating numbers
+
                 for (int i = 0; i < 6; i++)
                 {
                     luckyNumbers[i] = numGen.Next(numLow, numHigh + 1);
+                    //checking for duplicates
                     for (int j = 0; j < i; j++)
                     {
                         if (luckyNumbers[i] == luckyNumbers[j])
@@ -84,6 +89,7 @@ namespace Lucky_Numbers
                     Console.WriteLine("Lucky Number: " + luckyNumbers[i]);
                 }
 
+                //checking for matched guesses
 
                 for (int i = 0; i < 6; i++)
                 {
@@ -93,8 +99,10 @@ namespace Lucky_Numbers
                     }
                 }
 
-
+                //letting the know the jackpot
                 Console.WriteLine("The jackpot is " + jackpot + ".");
+
+                //calculating winnings and reading them out
 
                 switch (numMatched)
                 {
@@ -133,6 +141,7 @@ namespace Lucky_Numbers
                         break;
                 }
 
+                //asking for a replay
                 Console.WriteLine("Would you like to play again?(YES/NO)");
                 playAgain = Console.ReadLine().ToUpper();
                 if (playAgain == "YES")
